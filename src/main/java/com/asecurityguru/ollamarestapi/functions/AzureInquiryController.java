@@ -123,7 +123,8 @@ public class AzureInquiryController {
                                     if (tcData != null) {                                        
                                         tcSteps.append("<step id=").append("\\\"").append(ItemId).append("\\\" type=").append("\\\"Action")
                                         .append("\\\"><parameterizedString isformatted=").append("\\\"true").append("\\\">").append("Test Data: ")
-                                        .append(System.lineSeparator()).append(tcData.replace("\"", " "))
+                                        .append(System.lineSeparator()).append(tcData.replaceAll("[^A-Za-z0-9]",""))
+                                        //.append(System.lineSeparator()).append(tcData.replace("\"", " "))
                                         .append("</parameterizedString><parameterizedString isformatted=").append("\\\"true").append("\\\">")
                                         .append("</parameterizedString></step>");    
                                         ItemId++;
