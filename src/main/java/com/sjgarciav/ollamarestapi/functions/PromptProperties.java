@@ -1,4 +1,4 @@
-package com.asecurityguru.ollamarestapi.functions;
+package com.sjgarciav.ollamarestapi.functions;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 

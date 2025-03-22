@@ -1,4 +1,4 @@
-package com.asecurityguru.ollamarestapi.functions;
+package com.sjgarciav.ollamarestapi.functions;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
