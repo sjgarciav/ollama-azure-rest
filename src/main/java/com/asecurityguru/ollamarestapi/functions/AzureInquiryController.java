@@ -42,9 +42,6 @@ public class AzureInquiryController {
             String prompt = "Based on the following acceptance criteria, generate in json format: detailed test cases with Test Case ID, Steps, Test Data, Test Case Description, and Expected Result:\n\n"            
                     + azureResponse.acceptanceCriteria();
 
-            //String prompt = azureResponse.prompt()            
-            //        + azureResponse.acceptanceCriteria();
-
             String aiResponse = chatClient.prompt()
                     .user(prompt)
                     .call()
@@ -123,8 +120,8 @@ public class AzureInquiryController {
                                     if (tcData != null) {                                        
                                         tcSteps.append("<step id=").append("\\\"").append(ItemId).append("\\\" type=").append("\\\"Action")
                                         .append("\\\"><parameterizedString isformatted=").append("\\\"true").append("\\\">").append("Test Data: ")
-                                        .append(System.lineSeparator()).append(tcData.replaceAll("[^A-Za-z0-9]",""))
-                                        //.append(System.lineSeparator()).append(tcData.replace("\"", " "))
+                                        .append(System.lineSeparator()).append(tcData.replaceAll("[^A-Za-z0-9]"," "))
+                                        //.append(System.lineSeparator()).append(tcData.replace("\"", " ")).append(tcData.replace("\'", " "))
                                         .append("</parameterizedString><parameterizedString isformatted=").append("\\\"true").append("\\\">")
                                         .append("</parameterizedString></step>");    
                                         ItemId++;
@@ -154,7 +151,7 @@ public class AzureInquiryController {
                                         tcSteps.append("<step id=").append("\\\"").append(ItemId).append("\\\" type=").append("\\\"Action")
                                         .append("\\\"><parameterizedString isformatted=").append("\\\"true").append("\\\">").append(steps)
                                         .append("</parameterizedString><parameterizedString isformatted=").append("\\\"true").append("\\\">")
-                                        .append("</parameterizedString></step>"); 
+                                        .append("</parameterizedString></step>");                                         
                                     }    
                                 }                                                                                                                                                                                     
                                 ItemId++;                                                 
