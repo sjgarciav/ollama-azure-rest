@@ -1,7 +1,9 @@
 package com.sjgarciav.ollamarestapi.functions;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.stereotype.Component;
 
+@Component
 @ConfigurationProperties(prefix = "prompt")
 public class PromptProperties {
     private String testCases;

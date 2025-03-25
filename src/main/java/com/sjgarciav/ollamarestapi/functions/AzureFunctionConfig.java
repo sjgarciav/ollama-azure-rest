@@ -17,22 +17,22 @@ public class AzureFunctionConfig {
 
     @Bean
     @Description("Provides a function to fetch Azure story details and generate test cases.")
-    public Function<AzureDataService.Request, AzureDataService.Response> azureFunction()  {
+    public Function<AzureDataServiceGetUs.Request, AzureDataServiceGetUs.Response> azureFunction()  {
         // Validate Azure configuration properties
         validateAzureConfigProperties(azureApiProperties);
 
         // Create and return a new AzureDataService instance
-        return new AzureDataService(azureApiProperties);
+        return new AzureDataServiceGetUs(azureApiProperties);
     }
 
     @Bean
     @Description("Provides a function to fetch create a test cases on Azure.")
-    public Function<AzureDataService1.Request, AzureDataService1.Response> azureFunction1()  {
+    public Function<AzureDataServiceCreateTc.Request, AzureDataServiceCreateTc.Response> azureFunction1()  {
         // Validate Azure configuration properties
         validateAzureConfigProperties(azureApiProperties);
 
         // Create and return a new AzureDataService instance
-        return new AzureDataService1(azureApiProperties);
+        return new AzureDataServiceCreateTc(azureApiProperties);
     }
 
     private void validateAzureConfigProperties(AzureApiProperties properties) {

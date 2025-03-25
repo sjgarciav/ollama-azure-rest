@@ -10,14 +10,14 @@ import org.springframework.web.reactive.function.client.WebClientResponseExcepti
 import java.util.function.Function;
 
 @Validated
-public class AzureDataService1 implements Function<AzureDataService1.Request, AzureDataService1.Response> {
+public class AzureDataServiceCreateTc implements Function<AzureDataServiceCreateTc.Request, AzureDataServiceCreateTc.Response> {
 
-    private static final Logger log = LoggerFactory.getLogger(AzureDataService.class);
+    private static final Logger log = LoggerFactory.getLogger(AzureDataServiceGetUs.class);
     private final AzureApiProperties azureApiProperties;
     private final ObjectMapper objectMapper = new ObjectMapper();
     private final WebClient webClient;
 
-    public AzureDataService1(AzureApiProperties azureProps) {
+    public AzureDataServiceCreateTc(AzureApiProperties azureProps) {
         this.azureApiProperties = azureProps;
         this.webClient = WebClient.builder()
                 .baseUrl(azureApiProperties.getApiUrl())
