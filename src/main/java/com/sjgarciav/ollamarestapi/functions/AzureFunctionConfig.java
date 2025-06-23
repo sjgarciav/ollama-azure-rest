@@ -35,6 +35,16 @@ public class AzureFunctionConfig {
         return new AzureDataServiceCreateTc(azureApiProperties);
     }
 
+    @Bean
+    @Description("Provides a function to update a work item on Azure.")
+    public Function<AzureDataServiceUpdateWorkItem.Request, AzureDataServiceUpdateWorkItem.Response> azureFunction2()  {
+        // Validate Azure configuration properties
+        validateAzureConfigProperties(azureApiProperties);
+
+        // Create and return a new AzureDataService instance
+        return new AzureDataServiceUpdateWorkItem(azureApiProperties);
+    }
+
     private void validateAzureConfigProperties(AzureApiProperties properties) {
         if (properties.getApiUrl() == null || properties.getApiUrl().isEmpty()) {
             throw new IllegalArgumentException("Azure API URL must be provided.");

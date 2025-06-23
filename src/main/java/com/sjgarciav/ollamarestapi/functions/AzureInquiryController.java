@@ -18,12 +18,14 @@ public class AzureInquiryController {
     private final ChatClient chatClient;
     private final Function<AzureDataServiceGetUs.Request, AzureDataServiceGetUs.Response> azureFunction;
     private final Function<AzureDataServiceCreateTc.Request, AzureDataServiceCreateTc.Response> azureFunction1;  
+    private final Function<AzureDataServiceUpdateWorkItem.Request, AzureDataServiceUpdateWorkItem.Response> azureFunction2;
     private final com.sjgarciav.ollamarestapi.functions.PromptDataServiceGetProp promptService;
 
 
     public AzureInquiryController(ChatClient.Builder chatClientBuilder,
             Function<AzureDataServiceGetUs.Request, AzureDataServiceGetUs.Response> azureFunction,
             Function<AzureDataServiceCreateTc.Request, AzureDataServiceCreateTc.Response> azureFunction1,
+            Function<AzureDataServiceUpdateWorkItem.Request, AzureDataServiceUpdateWorkItem.Response> azureFunction2,
             PromptDataServiceGetProp promptService) {
 
         this.chatClient = chatClientBuilder
@@ -31,6 +33,7 @@ public class AzureInquiryController {
 
         this.azureFunction = azureFunction;
         this.azureFunction1 = azureFunction1;
+        this.azureFunction2 = azureFunction2;
         this.promptService = promptService;
     }
 
@@ -357,5 +360,28 @@ public class AzureInquiryController {
         }
     }
 
-      
+    //rest that needs the azure story to update the description of the user story
+    @GetMapping("/api/v1/azure-update-workItem")
+    public String updateAzureStory(@RequestParam String storyKey, @RequestBody String aiDescription) {
+        StringBuilder result = new StringBuilder();
+        try {
+            log.info("Updating Azure story with key: {}", storyKey);
+            log.info("New description: {}", aiDescription);
+
+            // Call the Azure function to update the story
+            AzureDataServiceUpdateWorkItem.Response azureResponse = azureFunction2.apply(new AzureDataServiceUpdateWorkItem.Request(storyKey, aiDescription));
+
+            log.info("Work Item id: {}", azureResponse.storyKey());
+            log.info("Work Item message: {}", azureResponse.message());
+
+            result.append("Work Item id: ").append(azureResponse.storyKey()).append(System.lineSeparator());
+            result.append("Work Item message: ").append(azureResponse.message()).append(System.lineSeparator());            
+
+            return result.toString();
+        } catch (Exception e) {
+            log.error("Error updating Azure story", e);
+            return "Failed to update Azure story.";
+        }
+
+    }
 }
